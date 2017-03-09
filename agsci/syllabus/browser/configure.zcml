@@ -1,0 +1,44 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:faceted="http://namespaces.zope.org/faceted"
+           i18n_domain="agsci.syllabus">
+
+    <browser:page
+        name="view"
+        for="..content.ICourse"
+        class=".views.CourseView"
+        layer="Products.agCommon.browser.interfaces.IThemeSpecific"
+        template="templates/course.pt"
+        permission="zope2.View"
+    />
+
+    <browser:page
+        name="view"
+        for="..content.ICourseContainer"
+        class=".views.CourseView"
+        layer="Products.agCommon.browser.interfaces.IThemeSpecific"
+        template="templates/course.pt"
+        permission="zope2.View"
+    />
+
+    <!-- Faceted Nav -->
+
+    <faceted:view
+        name="faceted-preview-items"
+        template="templates/faceted_courses.pt"
+        title="Faceted items preview"
+        permission="zope2.View"
+        class=".views.CourseContainerView"
+        for="..content.ICourseContainer"
+    />
+
+    <browser:page
+        for="..content.ICourseContainer"
+        name="faceted_query"
+        class=".views.CourseContainerFacetedQueryHandler"
+        template="templates/faceted_query.pt"
+        permission="zope2.View"
+    />
+
+</configure>

@@ -7,7 +7,7 @@ version = open(os.path.join(os.path.abspath(os.path.dirname(__file__)),
 setup(name='agsci.syllabus',
     version=version,
     description="",
-    long_description=open("README.txt").read() + "\n" +
+    long_description=open("README.md").read() + "\n" +
                      open("HISTORY.txt").read(),
     # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
@@ -26,7 +26,8 @@ setup(name='agsci.syllabus',
     zip_safe=False,
     install_requires=[
       'setuptools',
-      # -*- Extra requirements: -*-
+      'plone.app.dexterity',
+      'eea.facetednavigation',
       ],
     entry_points="""
       # -*- Entry points: -*-

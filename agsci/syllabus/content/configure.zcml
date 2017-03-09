@@ -1,0 +1,44 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:plone="http://namespaces.plone.org/plone"
+           i18n_domain="agsci.syllabus">
+
+    <utility
+        name="agsci.syllabus.semester"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".vocabulary.SemesterVocabularyFactory"
+    />
+
+    <utility
+        name="agsci.syllabus.department"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".vocabulary.DepartmentVocabularyFactory"
+    />
+
+    <utility
+        name="agsci.syllabus.course_level"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".vocabulary.CourseLevelVocabularyFactory"
+    />
+
+   <plone:behavior
+        title="Course Title From Course"
+        description=""
+        provides=".INameFromCourse"
+    />
+
+    <adapter
+        factory=".NameFromCourse" />
+
+   <plone:behavior
+        title="Syllabus name from semester"
+        description=""
+        provides=".INameFromSemester"
+    />
+
+    <adapter
+        factory=".NameFromSemester" />
+
+
+
+</configure>

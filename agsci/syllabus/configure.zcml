@@ -13,4 +13,14 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
     />
 
+    <genericsetup:importStep
+        name="agsci.syllabus"
+        title="agsci.syllabus: setuphanders.import_various"
+        description=""
+        handler="agsci.syllabus.setuphandlers.import_various"
+        />
+
+    <include package=".content" />
+    <include package=".browser" />
+
 </configure>

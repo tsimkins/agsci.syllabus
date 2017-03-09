@@ -3,3 +3,6 @@ syllabusMessageFactory = MessageFactory('agsci.syllabus')
 
 def initialize(context):
     pass
+
+# Register indexers
+import indexer
