@@ -16,7 +16,7 @@ class Criteria(_Criteria):
 
     def getFields(self):
 
-        fields = ['department', 'course_level']
+        fields = ['department', 'course_level', 'major']
 
         for (key, field) in ICourse.namesAndDescriptions():
 
@@ -70,6 +70,13 @@ class Criteria(_Criteria):
     def __criteria(self):
 
         criteria = [
+                Criterion(
+                    widget="criteria",
+                    title="Current search",
+                    position="center",
+                    section="default",
+                    hidden=False,
+                ),
                 Criterion(
                     _cid_="SearchableText",
                     widget="text",

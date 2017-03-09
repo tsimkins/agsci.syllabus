@@ -66,6 +66,12 @@ class ICourse(model.Schema):
         value_type=schema.Choice(vocabulary="agsci.syllabus.course_level"),
     )
 
+    major = schema.List(
+        title=_(u"Major"),
+        description=_(u""),
+        value_type=schema.Choice(vocabulary="agsci.syllabus.major"),
+    )
+
 class INameFromCourse(Interface):
     pass
 

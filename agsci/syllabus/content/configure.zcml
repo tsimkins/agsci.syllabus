@@ -3,6 +3,8 @@
            xmlns:plone="http://namespaces.plone.org/plone"
            i18n_domain="agsci.syllabus">
 
+    <!-- Vocabularies -->
+
     <utility
         name="agsci.syllabus.semester"
         provides="zope.schema.interfaces.IVocabularyFactory"
@@ -21,7 +23,15 @@
         component=".vocabulary.CourseLevelVocabularyFactory"
     />
 
-   <plone:behavior
+    <utility
+        name="agsci.syllabus.major"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".vocabulary.MajorVocabularyFactory"
+    />
+
+    <!-- Behaviors -->
+
+    <plone:behavior
         title="Course Title From Course"
         description=""
         provides=".INameFromCourse"
@@ -30,7 +40,7 @@
     <adapter
         factory=".NameFromCourse" />
 
-   <plone:behavior
+    <plone:behavior
         title="Syllabus name from semester"
         description=""
         provides=".INameFromSemester"

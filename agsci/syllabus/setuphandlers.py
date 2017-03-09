@@ -39,6 +39,7 @@ def add_catalog_indexes(context, logger=None):
     wanted = [
                 ('course_level', 'KeywordIndex'),
                 ('department', 'KeywordIndex'),
+                ('major', 'KeywordIndex'),
              ]
 
     indexables = []

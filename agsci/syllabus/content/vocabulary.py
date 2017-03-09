@@ -97,6 +97,38 @@ class CourseLevelVocabulary(StaticVocabulary):
         'Graduate',
         ]
 
+class MajorVocabulary(StaticVocabulary):
+
+    items = [
+        'Agribusiness Management',
+        'Agricultural Science',
+        'Agricultural Systems Management',
+        'Agricultural and Extension Education',
+        'Agroecology',
+        'Animal Science',
+        'BioRenewable Systems',
+        'Biological Engineering',
+        'Community, Environment, and Development',
+        'Environmental Resource Management',
+        'Food Science',
+        'Forest Ecosystem Management',
+        'Forest Science',
+        'Forest Technology',
+        'Horticulture',
+        'Immunology and Infectious Disease',
+        'Landscape Contracting',
+        'Plant Sciences',
+        'Toxicology',
+        'Turfgrass Science',
+        'Turfgrass Science and Management (Online)',
+        'Veterinary and Biomedical Sciences',
+        'Wildlife Technology ',
+        'Wildlife and Fisheries Science',
+        'Wood Products'
+    ]
+
+
 SemesterVocabularyFactory = SemesterVocabulary()
 DepartmentVocabularyFactory = DepartmentVocabulary()
 CourseLevelVocabularyFactory = CourseLevelVocabulary()
+MajorVocabularyFactory = MajorVocabulary()
