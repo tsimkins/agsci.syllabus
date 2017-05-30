@@ -90,45 +90,50 @@ class DepartmentVocabulary(KeyValueVocabulary):
         ('vbs', 'Veterinary and Biomedical Sciences'),
     ]
 
-class CourseLevelVocabulary(StaticVocabulary):
+class CoursePrefixVocabulary(KeyValueVocabulary):
 
-    items = [
-        'Undergraduate',
-        'Graduate',
+    @property
+    def items(self):
+
+        values = [
+            u'AG',
+            u'AGBM',
+            u'AGCOM',
+            u'AGECO',
+            u'AGRO',
+            u'ANSC',
+            u'ASM',
+            u'AYFCE',
+            u'BE',
+            u'BRS',
+            u'CED',
+            u'CEDEV',
+            u'ENT',
+            u'ERM',
+            u'FDSC',
+            u'FOR',
+            u'HORT',
+            u'INTAD',
+            u'INTAG',
+            u'PLANT',
+            u'PPATH',
+            u'PPEM',
+            u'RSOC',
+            u'SOILS',
+            u'SPAN',
+            u'TURF',
+            u'VBSC',
+            u'WFS',
+            u'WP',
+            u'YFE',
         ]
 
-class MajorVocabulary(StaticVocabulary):
+        values = [(x,x) for x in values]
 
-    items = [
-        'Agribusiness Management',
-        'Agricultural Science',
-        'Agricultural Systems Management',
-        'Agricultural and Extension Education',
-        'Agroecology',
-        'Animal Science',
-        'BioRenewable Systems',
-        'Biological Engineering',
-        'Community, Environment, and Development',
-        'Environmental Resource Management',
-        'Food Science',
-        'Forest Ecosystem Management',
-        'Forest Science',
-        'Forest Technology',
-        'Horticulture',
-        'Immunology and Infectious Disease',
-        'Landscape Contracting',
-        'Plant Sciences',
-        'Toxicology',
-        'Turfgrass Science',
-        'Turfgrass Science and Management (Online)',
-        'Veterinary and Biomedical Sciences',
-        'Wildlife Technology ',
-        'Wildlife and Fisheries Science',
-        'Wood Products'
-    ]
+        values.insert(0, (u'', u'Select a Course Prefix...'))
 
+        return values
 
 SemesterVocabularyFactory = SemesterVocabulary()
 DepartmentVocabularyFactory = DepartmentVocabulary()
-CourseLevelVocabularyFactory = CourseLevelVocabulary()
-MajorVocabularyFactory = MajorVocabulary()
+CoursePrefixVocabularyFactory = CoursePrefixVocabulary()

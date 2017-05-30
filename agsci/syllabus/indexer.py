@@ -6,11 +6,11 @@ from zope.component import provideAdapter
 from .content import ICourse
 
 @indexer(ICourse)
-def CourseLevel(context):
+def CoursePrefix(context):
 
-    return getattr(context, 'course_level', [])
+    return getattr(context, 'course_prefix', [])
 
-provideAdapter(CourseLevel, name='course_level')
+provideAdapter(CoursePrefix, name='course_prefix')
 
 @indexer(ICourse)
 def CourseDepartment(context):

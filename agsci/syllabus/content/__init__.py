@@ -1,5 +1,6 @@
 from plone.supermodel import model
 from zope import schema
+from plone.app.textfield import RichText
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.namedfile.field import NamedBlobFile
@@ -23,10 +24,34 @@ class ISyllabus(model.Schema):
         required=True,
     )
 
-    file = NamedBlobFile(
-        title=_(u"Syllabus PDF File"),
-        description=_(u""),
-        required=True,
+    instructor = RichText(
+        title=u"Instructor",
+        required=False
+    )
+
+    learning_objectives = RichText(
+        title=u"Learning Objectives",
+        required=False
+    )
+
+    grading_details = RichText(
+        title=u"Grading Details",
+        required=False
+    )
+
+    required_course_materials = RichText(
+        title=u"Required Course Materials",
+        required=False
+    )
+
+    course_schedule = RichText(
+        title=u"Course Schedule",
+        required=False
+    )
+
+    additional_information = RichText(
+        title=u"Additional Information",
+        required=False
     )
 
 @provider(IFormFieldProvider)
@@ -39,6 +64,18 @@ class ICourse(model.Schema):
         required=False,
     )
 
+    department = schema.List(
+        title=_(u"Department"),
+        description=_(u""),
+        value_type=schema.Choice(vocabulary="agsci.syllabus.department"),
+    )
+
+    course_prefix = schema.Choice(
+        title=_(u"Course Prefix"),
+        required=True,
+        vocabulary="agsci.syllabus.course_prefix",
+    )
+
     course_number = schema.TextLine(
         title=_(u"Course Number"),
         required=True,
@@ -49,28 +86,28 @@ class ICourse(model.Schema):
         required=True,
     )
 
+    credits_offered = schema.Decimal(
+        title=_(u"Credits Offered"),
+        required=True,
+    )
+
     description = schema.Text(
         title=_(u"Course Description"),
         required=False,
     )
 
-    department = schema.List(
-        title=_(u"Department"),
-        description=_(u""),
-        value_type=schema.Choice(vocabulary="agsci.syllabus.department"),
-    )
+class CourseHelper(object):
 
-    course_level = schema.List(
-        title=_(u"Course Level"),
-        description=_(u""),
-        value_type=schema.Choice(vocabulary="agsci.syllabus.course_level"),
-    )
+    def __init__(self, context):
+        self.context = context
 
-    major = schema.List(
-        title=_(u"Major"),
-        description=_(u""),
-        value_type=schema.Choice(vocabulary="agsci.syllabus.major"),
-    )
+    @property
+    def course_number(self):
+        return u"%s-%s" % (self.context.course_prefix, self.context.course_number)
+
+    @property
+    def course_title(self):
+        return u"%s: %s" % (self.course_number, self.context.course_name)
 
 class INameFromCourse(Interface):
     pass
@@ -84,9 +121,11 @@ class NameFromCourse(object):
 
     def __new__(cls, context):
         instance = super(NameFromCourse, cls).__new__(cls)
-        title = "%s: %s" % (context.course_number, context.course_name)
-        instance.title = context.course_number
-        context.title = title
+        helper = CourseHelper(context)
+
+        instance.title = helper.course_number
+        context.title = helper.course_title
+
         return instance
 
 class INameFromSemester(Interface):

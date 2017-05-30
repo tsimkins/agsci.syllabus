@@ -37,9 +37,8 @@ def add_catalog_indexes(context, logger=None):
     indexes = catalog.indexes()
     # Specify the indexes you want, with ('index_name', 'index_type')
     wanted = [
-                ('course_level', 'KeywordIndex'),
                 ('department', 'KeywordIndex'),
-                ('major', 'KeywordIndex'),
+                ('course_prefix', 'KeywordIndex'),
              ]
 
     indexables = []

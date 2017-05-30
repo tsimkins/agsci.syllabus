@@ -16,7 +16,7 @@ class Criteria(_Criteria):
 
     def getFields(self):
 
-        fields = ['department', 'course_level', 'major']
+        fields = ['department', 'course_prefix']
 
         for (key, field) in ICourse.namesAndDescriptions():
 
@@ -27,8 +27,14 @@ class Criteria(_Criteria):
                 cid = cid.replace('_', '')
 
                 # Get the vocabulary name
-                value_type = field.value_type
-                vocabulary_name = value_type.vocabularyName
+                try:
+                    value_type = field.value_type
+                except AttributeError:
+                    vocabulary_name = ""
+                    catalog = "portal_catalog"
+                else:
+                    vocabulary_name = value_type.vocabularyName
+                    catalog = ""
 
                 # Title is the field title
                 title = field.title
@@ -45,7 +51,7 @@ class Criteria(_Criteria):
                     section="default",
                     hidden=False,
                     count=True,
-                    catalog="",
+                    catalog=catalog,
                     sortcountable=False,
                     hidezerocount=False,
                     maxitems=50,

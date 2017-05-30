@@ -18,15 +18,9 @@
     />
 
     <utility
-        name="agsci.syllabus.course_level"
+        name="agsci.syllabus.course_prefix"
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".vocabulary.CourseLevelVocabularyFactory"
-    />
-
-    <utility
-        name="agsci.syllabus.major"
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".vocabulary.MajorVocabularyFactory"
+        component=".vocabulary.CoursePrefixVocabularyFactory"
     />
 
     <!-- Behaviors -->
