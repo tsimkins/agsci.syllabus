@@ -4,6 +4,24 @@
            xmlns:faceted="http://namespaces.zope.org/faceted"
            i18n_domain="agsci.syllabus">
 
+    <browser:viewlet
+        name="agcommon.htmlhead.title"
+        manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+        class=".viewlets.TitleViewlet"
+        permission="zope2.View"
+        layer="Products.agCommon.browser.interfaces.IThemeSpecific"
+        for="..content.ISyllabus"
+/>
+
+    <browser:page
+        name="view"
+        for="..content.ISyllabus"
+        class=".views.SyllabusView"
+        layer="Products.agCommon.browser.interfaces.IThemeSpecific"
+        template="templates/syllabus.pt"
+        permission="zope2.View"
+    />
+
     <browser:page
         name="view"
         for="..content.ICourse"

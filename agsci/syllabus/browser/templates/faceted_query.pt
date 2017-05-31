@@ -5,6 +5,7 @@
   contentFilter python: {'portal_type': 'FACET-EMPTY'} if not folderContents else {};
   here python:view.get_context(folderContents)">
   <tal:def define="
+    normalizeString nocall: context/plone_utils/normalizeString;
     kssClassesView context/@@kss_field_decorator_view | nothing;
     getKssClasses nocall:kssClassesView/getKssClassesInlineEditable | nothing;
     templateId template/getId | nothing">
@@ -14,7 +15,11 @@
             <tal:items repeat="brain folderContents">
                 <div class="tileItem">
                     <div class="tileTitle">
-                        <a tal:attributes="href brain/getURL" tal:content="brain/Title" />
+                        <a tal:define="wf_state brain/review_state|nothing;
+                                       wf_state_class python:'state-' + normalizeString(wf_state);"
+                           tal:attributes="href brain/getURL;
+                                           class wf_state_class"
+                           tal:content="brain/Title" />
                     </div>
                     <div class="tileDescription" tal:content="brain/Description" />
                 </div>

@@ -10,4 +10,11 @@
         handler=".onCourseEdit"
         />
 
+    <!-- Do something when a syllabus/semster is modified -->
+
+    <subscriber
+        for="..content.ISyllabus zope.lifecycleevent.IObjectModifiedEvent"
+        handler=".onSyllabusEdit"
+        />
+
 </configure>

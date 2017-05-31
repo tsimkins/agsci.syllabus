@@ -1,8 +1,14 @@
 from eea.facetednavigation.browser.app.query import FacetedQueryHandler
 from eea.facetednavigation.caching import ramcache
 from eea.facetednavigation.caching import cacheKeyFacetedNavigation
+from plone.app.textfield.value import RichTextValue
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
+from zope.component import getUtility
+from zope.schema import getFieldsInOrder
+from zope.schema.interfaces import IVocabularyFactory
+
+from ..content import ISyllabus
 from ..content.vocabulary import SemesterVocabularyFactory
 
 class BaseView(BrowserView):
@@ -22,34 +28,73 @@ class CourseView(BaseView):
         semesters.reverse()
 
         def idx(x):
+
             try:
-                return semesters.index(x.get('title', None))
+
+                s = getattr(x.getObject(), 'semester', '')
+
+                return semesters.index(s)
+
             except IndexError:
                 return 999
 
-        contents = self.context.listFolderContents({'Type' : 'Syllabus', 'sort_on' : 'Title'})
+        contents = self.context.getFolderContents({'Type' : 'Syllabus', 'sort_on' : 'sortable_title'})
 
-        for i in contents:
-            semester = getattr(i, 'semester', None)
+        contents = sorted(contents, key=lambda x: idx(x))
 
-            if semester:
-                if not data.has_key(semester):
+        return contents
 
-                    data[semester] = {
-                                           'title' : semester,
-                                           'contents' : []
-                    }
+class SyllabusView(BaseView):
 
-                data[semester]['contents'].append(i)
+    @property
+    def course(self):
+        return self.context.aq_parent
 
+    def title(self):
+        return u"%s (%s)" % (self.course.title, self.context.semester)
 
-        values = data.values()
+    def description(self):
+        return getattr(self.course, 'description', '')
 
-        values.sort(key=lambda x: idx(x))
+    def credits_offered(self):
+        return getattr(self.course, 'credits_offered', '')
 
-        return values
+    def increaseHeadingLevel(self, text):
 
+        if '<h2' in text:
+            for i in reversed(range(1, 6)):
+                from_header = "h%d" % i
+                to_header = "h%d" % (i+1)
+                text = text.replace("<%s" % from_header, "<%s" % to_header)
+                text = text.replace("</%s" % from_header, "</%s" % to_header)
 
+        return text
+
+    def fields(self):
+
+        class o(object):
+
+            def __init__(self, n, d, v):
+                self.name = n
+                self.title = d.title
+                self.value = v
+
+            def richtext(self):
+                return isinstance(self.value, RichTextValue)
+
+        for (n,d) in getFieldsInOrder(ISyllabus):
+            v = getattr(self.context, n, '')
+            if n not in ['semester',]:
+                yield o(n, d, v)
+
+    def department(self):
+        department = getattr(self.course, 'department', [])
+
+        # Department vocabulary
+        factory = getUtility(IVocabularyFactory, u"agsci.syllabus.department")
+        vocabulary = factory(self.course)
+
+        return [x.title for x in vocabulary if x.value in department]
 
 class CourseContainerView(BaseView):
 

@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+    <metal:content-title fill-slot="content-title">
+
+        <h1 class="documentFirstHeading" tal:content="view/title" />
+
+    </metal:content-title>
+
+    <metal:content-description fill-slot="content-description">
+
+        <p class="documentDescription" tal:content="view/description" />
+
+    </metal:content-description>
+
+    <metal:content-core fill-slot="content-core">
+
+        <h2>Department(s)</h2>
+
+        <ul>
+            <li tal:repeat="i view/department"
+                tal:content="i" />
+        </ul>
+
+        <h2>Credits</h2>
+
+        <p tal:content="view/credits_offered" />
+
+        <tal:attrs tal:repeat="i view/fields">
+            <h2 tal:content="i/title" />
+
+            <tal:text
+                tal:condition="i/richtext"
+                tal:replace="structure python: view.increaseHeadingLevel(i.value.output)" />
+
+            <p tal:condition="not: i/richtext"
+                tal:replace="i/value" />
+        </tal:attrs>
+
+    </metal:content-core>
+
+</body>
+</html>

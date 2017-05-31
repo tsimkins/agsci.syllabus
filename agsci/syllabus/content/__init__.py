@@ -103,7 +103,7 @@ class CourseHelper(object):
 
     @property
     def course_number(self):
-        return u"%s-%s" % (self.context.course_prefix, self.context.course_number)
+        return u"%s %s" % (self.context.course_prefix, self.context.course_number)
 
     @property
     def course_title(self):

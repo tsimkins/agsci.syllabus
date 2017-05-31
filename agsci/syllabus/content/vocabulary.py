@@ -14,9 +14,10 @@ class StaticVocabulary(object):
 
     def __call__(self, context):
 
-        items = list(set(self.items))
+        items = self.items
 
         if not self.preserve_order:
+            items = list(set(self.items))
             items.sort()
 
         terms = [SimpleTerm(x,title=x) for x in items]
