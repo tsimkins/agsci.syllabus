@@ -10,16 +10,17 @@
 
     <metal:content-core fill-slot="content-core">
 
-        <h2>Semesters</h2>
+        <h2>Syllabi</h2>
 
         <ul
             tal:define="normalizeString nocall: context/plone_utils/normalizeString;">
             <li tal:repeat="i view/getFolderContents">
                 <a tal:define="wf_state i/review_state|nothing;
-                               wf_state_class python:'state-' + normalizeString(wf_state);"
+                               wf_state_class python:'state-' + normalizeString(wf_state);
+                               syllabus_title python: view.syllabus_title(i)"
                    tal:attributes="href i/getURL;
                                    class wf_state_class"
-                   tal:content="string:${context/Title} (${i/Title})" />
+                   tal:content="syllabus_title" />
             </li>
         </ul>
 

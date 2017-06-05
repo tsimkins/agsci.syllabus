@@ -35,14 +35,12 @@
         factory=".NameFromCourse" />
 
     <plone:behavior
-        title="Syllabus name from semester"
+        title="Syllabus name from semester/section"
         description=""
-        provides=".INameFromSemester"
+        provides=".INameFromSyllabus"
     />
 
     <adapter
-        factory=".NameFromSemester" />
-
-
+        factory=".NameFromSyllabus" />
 
 </configure>

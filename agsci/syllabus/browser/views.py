@@ -8,7 +8,7 @@ from zope.component import getUtility
 from zope.schema import getFieldsInOrder
 from zope.schema.interfaces import IVocabularyFactory
 
-from ..content import ISyllabus
+from ..content import ISyllabus, SyllabusHelper
 from ..content.vocabulary import SemesterVocabularyFactory
 
 class BaseView(BrowserView):
@@ -44,6 +44,11 @@ class CourseView(BaseView):
 
         return contents
 
+    def syllabus_title(self, r):
+        o = r.getObject()
+        syllabus_helper = SyllabusHelper(o)
+        return syllabus_helper.syllabus_title
+
 class SyllabusView(BaseView):
 
     @property
@@ -51,7 +56,8 @@ class SyllabusView(BaseView):
         return self.context.aq_parent
 
     def title(self):
-        return u"%s (%s)" % (self.course.title, self.context.semester)
+        helper = SyllabusHelper(self.context)
+        return helper.syllabus_title_display
 
     def description(self):
         return getattr(self.course, 'description', '')

@@ -22,7 +22,7 @@
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">plone.dexterity.content.Item</property>
  <property name="behaviors">
-  <element value="agsci.syllabus.content.INameFromSemester" />
+  <element value="agsci.syllabus.content.INameFromSyllabus" />
  </property>
 
   <property name="schema">agsci.syllabus.content.ISyllabus</property>

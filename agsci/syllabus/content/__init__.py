@@ -24,6 +24,12 @@ class ISyllabus(model.Schema):
         required=True,
     )
 
+    section = schema.TextLine(
+        title=_(u"Section"),
+        description=_(u"Optional"),
+        required=False,
+    )
+
     instructor = RichText(
         title=u"Instructor",
         required=False
@@ -109,6 +115,41 @@ class CourseHelper(object):
     def course_title(self):
         return u"%s: %s" % (self.course_number, self.context.course_name)
 
+class SyllabusHelper(object):
+
+    def __init__(self, context):
+        self.context = context
+
+    @property
+    def semester(self):
+        return getattr(self.context, 'semester', '')
+
+    @property
+    def section(self):
+        return getattr(self.context, 'section', '')
+
+    @property
+    def syllabus_title(self):
+
+        if self.section:
+            return u"%s, Section %s" % (self.semester, self.section)
+
+        return self.semester
+
+    @property
+    def syllabus_title_display(self):
+
+        course = self.context.aq_parent
+
+        course_helper = CourseHelper(course)
+
+        course_title = course_helper.course_title
+
+        if self.section:
+            return u"%s (%s, Section %s)" % (course_title, self.semester, self.section)
+
+        return u"%s (%s)" % (course_title, self.semester)
+
 class INameFromCourse(Interface):
     pass
 
@@ -128,18 +169,22 @@ class NameFromCourse(object):
 
         return instance
 
-class INameFromSemester(Interface):
+class INameFromSyllabus(Interface):
     pass
 
 @implementer(INameFromTitle)
-@adapter(INameFromSemester)
-class NameFromSemester(object):
+@adapter(INameFromSyllabus)
+class NameFromSyllabus(object):
 
     def __init__(self, context):
         self.context = context
 
     def __new__(cls, context):
-        instance = super(NameFromSemester, cls).__new__(cls)
-        instance.title = context.semester
-        context.title = context.semester
+        instance = super(NameFromSyllabus, cls).__new__(cls)
+
+        helper = SyllabusHelper(context)
+
+        instance.title = helper.syllabus_title
+        context.title = helper.syllabus_title
+
         return instance
