@@ -85,13 +85,22 @@ class SyllabusView(BaseView):
                 self.title = d.title
                 self.value = v
 
+            @property
             def richtext(self):
                 return isinstance(self.value, RichTextValue)
+
+            @property
+            def has_value(self):
+                if self.richtext:
+                    return not not self.value.output
+                return not not self.value
 
         for (n,d) in getFieldsInOrder(ISyllabus):
             v = getattr(self.context, n, '')
             if n not in ['semester',]:
-                yield o(n, d, v)
+                _o = o(n, d, v)
+                if _o.has_value:
+                    yield _o
 
     def department(self):
         department = getattr(self.course, 'department', [])
