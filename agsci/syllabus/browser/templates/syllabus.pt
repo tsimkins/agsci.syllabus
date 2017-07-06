@@ -29,20 +29,9 @@
                 tal:content="i" />
         </ul>
 
-        <h2>Credits</h2>
+        <p tal:condition="context/text"
+           tal:replace="structure context/text/output" />
 
-        <p tal:content="view/credits_offered" />
-
-        <tal:attrs tal:repeat="i view/fields">
-            <h2 tal:content="i/title" />
-
-            <tal:text
-                tal:condition="i/richtext"
-                tal:replace="structure python: view.increaseHeadingLevel(i.value.output)" />
-
-            <p tal:condition="not: i/richtext"
-                tal:replace="i/value" />
-        </tal:attrs>
 
         <h2>Penn State Statements</h2>
         <h3>The Penn State Principles</h3>

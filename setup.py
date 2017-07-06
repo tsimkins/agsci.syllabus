@@ -28,6 +28,7 @@ setup(name='agsci.syllabus',
       'setuptools',
       'plone.app.dexterity',
       'eea.facetednavigation',
+      'plone.app.contenttypes',
       ],
     entry_points="""
       # -*- Entry points: -*-

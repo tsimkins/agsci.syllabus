@@ -30,35 +30,6 @@ class ISyllabus(model.Schema):
         required=False,
     )
 
-    instructor = RichText(
-        title=u"Instructor",
-        required=False
-    )
-
-    learning_objectives = RichText(
-        title=u"Learning Objectives",
-        required=False
-    )
-
-    grading_details = RichText(
-        title=u"Grading Details",
-        required=False
-    )
-
-    required_course_materials = RichText(
-        title=u"Required Course Materials",
-        required=False
-    )
-
-    course_schedule = RichText(
-        title=u"Course Schedule",
-        required=False
-    )
-
-    additional_information = RichText(
-        title=u"Additional Information",
-        required=False
-    )
 
 @provider(IFormFieldProvider)
 class ICourse(model.Schema):
@@ -89,11 +60,6 @@ class ICourse(model.Schema):
 
     course_name = schema.TextLine(
         title=_(u"Course Name"),
-        required=True,
-    )
-
-    credits_offered = schema.Decimal(
-        title=_(u"Credits Offered"),
         required=True,
     )
 
