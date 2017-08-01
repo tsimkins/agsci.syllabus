@@ -94,7 +94,6 @@ class DepartmentVocabulary(KeyValueVocabulary):
         ('BRS', 'Biorenewable Systems'),
         ('ERM', 'Environmental Resource Management'),
         ('INTL', 'International'),
-        ('PPATH', 'PPATH'),
         ('OTHER', 'Other'),
     ]
 
