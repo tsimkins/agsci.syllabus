@@ -113,16 +113,45 @@
         
         <h3>Mental Health Services</h3>
         
-        <p>Mental health services are available to help you maintain your academic success.
-        <a href=
-        "http://student.worldcampus.psu.edu/student-services/mental-health-services">Visit the
-        student website</a> today to learn more or to speak with a mental health advocate who
-        can help you address concerns including anxiety, depression, relationship difficulties,
-        and stress. If you or someone you know is experiencing a crisis situation, please call
-        your local emergency service.</p>
+        <p>Many students at Penn State face personal challenges or have
+        psychological needs that may interfere with their academic progress,
+        social development, or emotional wellbeing. The university offers a
+        variety of confidential services to help you through difficult times,
+        including individual and group counseling, crisis intervention,
+        consultations, online chats, and mental health screenings. These
+        services are provided by staff who welcome all students and embrace a
+        philosophy respectful of clients' cultural and religious backgrounds,
+        and sensitive to differences in race, ability, gender identity and
+        sexual orientation.</p> 
+        
+        <p><a href="http://studentaffairs.psu.edu/counseling/">Counseling and
+        Psychological Services at University Park  (CAPS)</a><br>
+        814-863-0395</p>
 
+        <p><a href="http://senate.psu.edu/faculty/counseling-services-at-commonwealth-campuses/">Counseling
+        and Psychological Services at Commonwealth Campuses</a></p>
         
+        <p>Penn State Crisis Line (24 hours/7 days/week): 877-229-6400<br>
+        Crisis Text Line (24 hours/7 days/week): Text LIONS to 741741</p>
         
+        <h3>Educational Equity/Report Bias</h3>
+        
+        <p>Consistent with University Policy AD29, students who believe they 
+        have experienced or observed a hate crime, an act of intolerance,
+        discrimination, or harassment that occurs at Penn State are urged to
+        report these incidents as outlined on the <a href="http://equity.psu.edu/reportbias">University's
+        Report Bias webpage</a></p>
+
+        <p>Contact one of the following offices:</p>
+        
+        <ul>
+        <li>University Police Services, University Park: 814-863-1111</li>
+        <li>Multicultural Resource Center, Diversity Advocate for Students: 814-865-1773</li>
+        <li>Office of the Vice Provost for Educational Equity: 814-865-5906</li>
+        <li>Office of the Vice President for Student Affairs: 814-865-0909</li>
+        <li>Affirmative Action Office: 814-863-0471</li>
+        </ul>
+
     </metal:content-core>
 
 </body>
