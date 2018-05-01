@@ -7,7 +7,7 @@
     i18n_domain="agsci.atlas">
 
     <adapter
-        for="eea.facetednavigation.interfaces.IFacetedNavigable"
+        for="eea.facetednavigation.interfaces.IFacetedNavigable .content.ICourseContainer"
         provides="eea.facetednavigation.criteria.interfaces.ICriteria"
         factory=".facetednavigation.Criteria" />
 
